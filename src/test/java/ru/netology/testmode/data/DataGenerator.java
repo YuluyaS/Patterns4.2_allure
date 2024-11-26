@@ -7,14 +7,14 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import lombok.Value;
 import lombok.val;
-import lombok.var;
+//import lombok.var;
 
 import java.util.Locale;
 
 import static io.restassured.RestAssured.given;
 
 public class DataGenerator {
-    private static final Faker faker = new Faker(new Locale("en"));
+    private static final Faker FAKER = new Faker(new Locale("en"));
 
     private DataGenerator() {
     }
@@ -28,7 +28,7 @@ public class DataGenerator {
     .build();
 
     static void sendRequest(DataGenerator.RegistrationDto user) {
-        given()RequestSpecification
+        given()
                 .spec(requestSpec)
                 .body(new RegistrationDto("vasya", "password", "active"))
                 .when().log().all()
@@ -45,14 +45,13 @@ public class DataGenerator {
     public static String getRandomLogin() {
         // TODO: добавить логику для объявления переменной login и задания её значения, для генерации
         //  случайного логина используйте faker
-        return Faker.name().username();
-
+        return FAKER.name().username();
     }
 
     public static String getRandomPassword() {
         // TODO: добавить логику для объявления переменной password и задания её значения, для генерации
         //  случайного пароля используйте faker
-        return Faker.internet().password();
+        return FAKER.internet().password();
     }
 
     public static class Registration {
