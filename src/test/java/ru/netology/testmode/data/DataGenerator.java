@@ -30,7 +30,9 @@ public class DataGenerator {
     static void sendRequest(DataGenerator.RegistrationDto user) {
         given()
                 .spec(requestSpec)
-                .body(new RegistrationDto("vasya", "password", "active"))
+
+                .body(new RegistrationDto(user.getLogin(), user.getPassword(), user.getStatus()))
+                //.body(new RegistrationDto("vasya", "password", "active"))
                 .when().log().all()
                 .post("/api/system/users")
                 .then().log().all()
